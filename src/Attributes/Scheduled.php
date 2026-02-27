@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MonkeysLegion\Scheduler\Attributes;
+namespace Monkeyslegion\Schedule\Attributes;
 
 use Attribute;
 

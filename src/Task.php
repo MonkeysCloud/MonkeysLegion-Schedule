@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MonkeysLegion\Scheduler;
+namespace Monkeyslegion\Schedule;
 
 use Closure;
 
@@ -23,6 +23,7 @@ readonly class Task
         /** Configuration for Point 3 (Locking) */
         public bool $withoutOverlapping = true,
         public int $ttl = 3600,
+        public bool $onOneServer = false,
         
         /** Custom name (Optional, defaults to a hash of the action) */
         ?string $name = null 
