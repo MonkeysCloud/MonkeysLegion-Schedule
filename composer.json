@@ -1,0 +1,23 @@
+{
+  "name": "monkeyscloud/monkeyslegion-schedule",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Monkeyslegion\\Schedule\\": "src/",
+      "Monkeyslegion\\Schedule\\Tests\\": "tests/"
+    }
+  },
+  "minimum-stability": "dev",
+  "require": {
+    "php": "^8.4",
+    "monkeyscloud/monkeyslegion-core": "^1.0",
+    "monkeyscloud/monkeyslegion-database": "^1.0",
+    "monkeyscloud/monkeyslegion-query": "^1.0",
+    "monkeyscloud/monkeyslegion-cli": "^1.0"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^2.1",
+    "phpunit/phpunit": "^13.1@dev"
+  }
+}
