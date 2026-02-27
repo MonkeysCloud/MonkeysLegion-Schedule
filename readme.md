@@ -56,13 +56,67 @@ Tracking the health and history of the background ecosystem.
 
 Integrated commands provided via the `monkeyslegion/cli` package.
 
------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Command               | Arguments/Options     | Description                                                                                                   |
 | :---------------------| :---------------------| :-------------------------------------------------------------------------------------------------------------|
+| `schedule:optimize`   |                       | **The Optimizer.** Cache all the scheduled tasks in the Cache Provider for faster retrieval.                  |
 | `schedule:run`        | `--force`, `--tag=`   | **The Heartbeat.** One-shot execution. Evaluates the clock and spawns sub-processes for due tasks.            |
 | `schedule:work`       | `--sleep=1`           | **The Daemon.** Persistent loop. Polls system clock and Drivers (Redis/DB) for high reactivity.               |
 | `schedule:list`       | `--verbose`           | **The Dashboard.** Displays a table of all tasks with human-friendly frequencies and "Next Run" countdowns.   |
 | `schedule:test`       | `{task_id}`           | **The Sandbox.** Manually triggers a task immediately. Respects locks unless `--force` is used.               |
 | `schedule:clear-locks`| `{task_id?}`          | **The Emergency Brake.** Manually clears active Atomic Locks from the Cache.                                  |
 | `schedule:interrupt`  | `{pid}`               | **Process Control.** Safely stops a running sub-process without killing the main Daemon loop.                 |
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Development Roadmap
+
+## Phase 1: Core Foundation & Attributes
+
+*Goal: Define how tasks look and how the framework finds them.*
+
+* [X] Implement `#[Scheduled]` Attribute with properties (`expression`, `tags`, `onOneServer`, etc.).
+* [ ] Create the `Task` Value Object/Entity to encapsulate closures, commands, and classes.
+* [ ] Build the `AttributeScanner` to locate scheduled classes within the app directory.
+* [ ] Develop the `ScheduleManager` (The Registry) to hold the `TaskCollection`.
+
+## Phase 2: The Fluent Builder & Frequency Logic
+
+*Goal: Allow developers to define schedules without writing raw Cron strings.*
+
+* [ ] Build the `Frequency` trait/builder for methods like `->daily()`, `->everyFiveMinutes()`.
+* [ ] Implement the `Schedule` service for manual registration (Closures/Commands) in Service Providers.
+* [ ] Create the `CronParser` wrapper to evaluate if a task is "due" based on the system clock.
+
+## Phase 3: The Execution Engine (Normal Mode)
+
+*Goal: Trigger and run tasks via the CLI.*
+
+* [ ] Develop the `schedule:run` command (The Heartbeat).
+* [ ] Implement **Multi-process Execution** using `proc_open` or `symfony/process` for task isolation.
+* [ ] Integrate the `monkeyslegion/logger` to capture task output (stdout/stderr).
+* [ ] Implement the basic `TaskStarting`, `TaskFinished`, and `TaskFailed` events.
+
+## Phase 4: Atomic Locking (Prevention)
+
+*Goal: Ensure reliability in distributed environments.*
+
+* [ ] Create the `LockProviderInterface`.
+* [ ] Build the default `CacheLockProvider` utilizing `monkeyslegion/cache`.
+* [ ] Implement the `->withoutOverlapping()` logic within the Runner.
+* [ ] Define the default TTL (Time-To-Live) logic for auto-healing "Zombie" locks.
+
+## Phase 5: Daemon Mode & Driver Integration
+
+*Goal: High-reactivity and persistent execution.*
+
+* [ ] Develop the `schedule:work` command (The Daemon).
+* [ ] Implement the `while(true)` loop with the 1-second pulse.
+* [ ] Create the `DriverInterface` for polling "pushed" tasks (Redis/Database).
+* [ ] Add the `schedule:interrupt` utility to manage sub-processes.
+
+## Phase 6: Observability & Tooling
+
+*Goal: Finalize the Developer Experience (DX).*
+
+* [ ] Build the `schedule:list` command with human-friendly frequency translations.
+* [ ] Implement `schedule:test {id}` for manual debugging.
+* [ ] Add the `schedule:clear-locks` utility.
+* [ ] Finalize documentation and "Legion-style" installation guide.
