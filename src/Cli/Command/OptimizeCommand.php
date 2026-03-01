@@ -7,12 +7,17 @@ namespace Monkeyslegion\Schedule\Cli\Command;
 use MonkeysLegion\Cli\Console\Attributes\Command as CommandAttr;
 use MonkeysLegion\Cli\Console\Command;
 use Monkeyslegion\Schedule\Discovery\AttributeScanner;
-use MonkeysLegion\Database\Cache\Contracts\CacheInterface;
+use Monkeyslegion\Database\Cache\Contracts\CacheInterface;
+use Monkeyslegion\Schedule\Task;
 
-#[CommandAttr('schedule:optimize', 'The Optimizer. Cache all the scheduled tasks in the Cache Provider for faster retrieval.')]
+#[CommandAttr(
+    'schedule:optimize',
+    'Cache all scheduled tasks for faster retrieval.'
+)]
 final class OptimizeCommand extends Command
 {
     private readonly AttributeScanner $scanner;
+
     public function __construct(
         private readonly CacheInterface $cache
     ) {
@@ -20,40 +25,51 @@ final class OptimizeCommand extends Command
         $this->scanner = new AttributeScanner();
     }
 
-    /**
-     * Handle the optimization process.
-     * Scans for all [Scheduled] attributes and persists the resulting Task objects to cache.
-     */
     protected function handle(): int
     {
-        $this->info('Starting Schedule Optimizer...');
-        
+        $this->workerLine('OPTIMIZER STARTED', 'green');
+
         try {
-            $this->line('Scanning for scheduled tasks...');
             $tasks = $this->scanner->scan();
-            
             $count = count($tasks);
-            $this->info("Found {$count} scheduled tasks.");
 
             if ($count === 0) {
-                $this->warning('No tasks found to cache.');
+                $this->workerLine('No tasks found to cache.', 'yellow');
                 return self::SUCCESS;
             }
 
-            $this->line('Persisting tasks to cache...');
-            
-            // We use a fixed key 'schedule:tasks' for the cached tasks.
-            $this->cache->set('schedule:tasks', $tasks, 86400 * 365); // Cache for a year
+            $this->workerLine("Persisting {$count} tasks to cache...", 'cyan');
 
-            $this->info('Optimization complete! All tasks have been cached.');
-            
+            $this->cache->set(Task::CACHE_KEY_TASKS, $tasks, 86400 * 365); // 1 year TTL
+
+            $this->workerLine('Optimization complete! All tasks have been cached.', 'green');
+
             return self::SUCCESS;
         } catch (\Throwable $e) {
-            $this->error('Optimization failed: ' . $e->getMessage());
-            if ($this->hasOption('v') || $this->hasOption('verbose')) {
-                $this->line($e->getTraceAsString());
+            $this->workerLine('OPTIMIZATION FAILED: ' . $e->getMessage(), 'red');
+
+            if ($this->isVerbose()) {
+                $this->cliLine()
+                    ->add($e->getTraceAsString(), 'gray')
+                    ->print();
             }
+
             return self::FAILURE;
         }
+    }
+
+    private function workerLine(string $message, string $color): void
+    {
+        $time = date('Y-m-d H:i:s');
+
+        $this->cliLine()
+            ->add("[{$time}] ", 'gray')
+            ->add($message, $color, 'bold')
+            ->print();
+    }
+
+    private function isVerbose(): bool
+    {
+        return $this->hasOption('v') || $this->hasOption('verbose');
     }
 }

@@ -15,6 +15,7 @@ final class Scheduled
      * @param bool $onOneServer Prevent multi-server execution (Shared Lock)
      * @param bool $overlap Allow or prevent overlapping instances
      * @param int|null $ttl Custom lock timeout in seconds
+     * @param string|null $name Optional custom name for the task (defaults to generated ID)
      */
     public function __construct(
         public string $expression,
@@ -22,5 +23,9 @@ final class Scheduled
         public bool $onOneServer = false,
         public bool $overlap = false,
         public ?int $ttl = null,
+        public ?string $name = null,
+        public ?string $startingEvent = null,
+        public ?string $finishedEvent = null,
+        public ?string $failedEvent = null
     ) {}
 }

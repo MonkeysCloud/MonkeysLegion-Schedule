@@ -16,7 +16,8 @@ class AttributeScanner
      * @param array<string> $scanPaths Default folders to scan
      */
     public function __construct(
-        private array $scanPaths = ['app'] // Default folder to scan
+        private array $scanPaths = ['app'], // Default folder to scan
+        private readonly ?string $baseRoot = null
     ) {}
 
     /**
@@ -25,9 +26,10 @@ class AttributeScanner
     public function scan(): array
     {
         $tasks = [];
-        
+
         foreach ($this->scanPaths as $path) {
-            $directory = base_path($path);
+            $directory = $this->baseRoot ? ($this->baseRoot . DIRECTORY_SEPARATOR . $path) : base_path($path);
+            $directory = rtrim($directory, DIRECTORY_SEPARATOR);
 
             if (!is_dir($directory)) {
                 continue;
@@ -59,6 +61,7 @@ class AttributeScanner
 
         // 1. Check Class Level Attributes
         foreach ($reflection->getAttributes(Scheduled::class) as $attribute) {
+            $this->checkInvokable($reflection);
             $instance = $attribute->newInstance();
             $found[] = new Task(
                 action: [$className, '__invoke'], // Assume invokable
@@ -66,7 +69,11 @@ class AttributeScanner
                 tags: $instance->tags,
                 withoutOverlapping: !$instance->overlap,
                 ttl: $instance->ttl ?? 3600,
-                onOneServer: $instance->onOneServer
+                onOneServer: $instance->onOneServer,
+                name: $instance->name,
+                startingEvent: $instance->startingEvent,
+                finishedEvent: $instance->finishedEvent,
+                failedEvent: $instance->failedEvent
             );
         }
 
@@ -80,7 +87,11 @@ class AttributeScanner
                     tags: $instance->tags,
                     withoutOverlapping: !$instance->overlap,
                     ttl: $instance->ttl ?? 3600,
-                    onOneServer: $instance->onOneServer
+                    onOneServer: $instance->onOneServer,
+                    name: $instance->name,
+                    startingEvent: $instance->startingEvent,
+                    finishedEvent: $instance->finishedEvent,
+                    failedEvent: $instance->failedEvent
                 );
             }
         }
@@ -91,20 +102,27 @@ class AttributeScanner
     private function extractClassName(string $filePath): ?string
     {
         $content = file_get_contents($filePath);
-        if ($content === false) {
+        if ($content === false) return null;
+
+        // More robust Namespace match
+        if (!preg_match('/namespace\s+(.+?);/s', $content, $namespaceMatches)) {
             return null;
         }
-
-        if (!preg_match('/namespace\s+([^;]+);/S', $content, $namespaceMatches)) {
-            return null;
-        }
-
         $namespace = trim($namespaceMatches[1]);
 
-        if (!preg_match('/(?:class|readonly class)\s+([^\s{]+)/S', $content, $classMatches)) {
+        // This regex looks for the word "class" and captures the next word, 
+        // skipping keywords like final, abstract, or readonly.
+        if (!preg_match('/(?:class|interface|trait)\s+([a-zA-Z0-9_]+)/i', $content, $classMatches)) {
             return null;
         }
 
         return $namespace . '\\' . $classMatches[1];
+    }
+
+    private function checkInvokable(ReflectionClass $reflection): void
+    {
+        if (!$reflection->hasMethod('__invoke')) {
+            throw new \LogicException("Class {$reflection->getName()} is marked with #[Scheduled] but does not have an __invoke method.");
+        }
     }
 }
