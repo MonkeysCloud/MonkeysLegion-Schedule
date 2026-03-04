@@ -40,7 +40,7 @@ composer require monkeyscloud/monkeyslegion-schedule
 Just add the `#[Scheduled]` attribute to any class with an `__invoke` method or to specific class methods.
 
 ```php
-use Monkeyslegion\Schedule\Attributes\Scheduled;
+use MonkeysLegion\Schedule\Attributes\Scheduled;
 
 #[Scheduled(expression: '* * * * * *')] // Second-precision!
 class HeartbeatAction

@@ -342,12 +342,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/MonkeysCloud/MonkeysLegion-Cache.git",
-                "reference": "d31d50bc14bf2482776c23499a582e7aeac6ea92"
+                "reference": "3cc25fcb90f5757c124b31dbb094206ce8ece56f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MonkeysCloud/MonkeysLegion-Cache/zipball/d31d50bc14bf2482776c23499a582e7aeac6ea92",
-                "reference": "d31d50bc14bf2482776c23499a582e7aeac6ea92",
+                "url": "https://api.github.com/repos/MonkeysCloud/MonkeysLegion-Cache/zipball/3cc25fcb90f5757c124b31dbb094206ce8ece56f",
+                "reference": "3cc25fcb90f5757c124b31dbb094206ce8ece56f",
                 "shasum": ""
             },
             "require": {
@@ -392,9 +392,9 @@
             "description": "Cache package for MonkeysLegion Framework with multiple drivers support",
             "support": {
                 "issues": "https://github.com/MonkeysCloud/MonkeysLegion-Cache/issues",
-                "source": "https://github.com/MonkeysCloud/MonkeysLegion-Cache/tree/1.0.x"
+                "source": "https://github.com/MonkeysCloud/MonkeysLegion-Cache/tree/main"
             },
-            "time": "2025-12-04T01:25:32+00:00"
+            "time": "2026-03-04T21:47:39+00:00"
         },
         {
             "name": "monkeyscloud/monkeyslegion-cli",
@@ -1572,8 +1572,8 @@
             "version": "2.2.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/98b44590900543d56bcca83cf4d62e1fca344492",
-                "reference": "98b44590900543d56bcca83cf4d62e1fca344492",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/94731cc21934c739658434d3098ead80a4325db8",
+                "reference": "94731cc21934c739658434d3098ead80a4325db8",
                 "shasum": ""
             },
             "require": {
@@ -1619,7 +1619,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-04T09:14:08+00:00"
+            "time": "2026-03-04T20:10:37+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",

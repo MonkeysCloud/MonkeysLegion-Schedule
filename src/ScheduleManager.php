@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Monkeyslegion\Schedule;
+namespace MonkeysLegion\Schedule;
 
 use Closure;
 use MonkeysLegion\Database\Cache\Contracts\CacheInterface;
-use Monkeyslegion\Schedule\Contracts\ScheduleDriver;
-use Monkeyslegion\Schedule\Discovery\AttributeScanner;
-use Monkeyslegion\Schedule\Contracts\LockProvider;
-use Monkeyslegion\Schedule\Support\CacheLockProvider;
+use MonkeysLegion\Schedule\Contracts\ScheduleDriver;
+use MonkeysLegion\Schedule\Discovery\AttributeScanner;
+use MonkeysLegion\Schedule\Contracts\LockProvider;
+use MonkeysLegion\Schedule\Support\CacheLockProvider;
 
 class ScheduleManager
 {

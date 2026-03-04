@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Monkeyslegion\Schedule\Discovery;
+namespace MonkeysLegion\Schedule\Discovery;
 
 use ReflectionClass;
 use RecursiveIteratorIterator;
 use RecursiveDirectoryIterator;
-use Monkeyslegion\Schedule\Task;
-use Monkeyslegion\Schedule\Attributes\Scheduled;
+use MonkeysLegion\Schedule\Task;
+use MonkeysLegion\Schedule\Attributes\Scheduled;
 
 class AttributeScanner
 {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Monkeyslegion\Schedule\Tests\Feature;
+namespace MonkeysLegion\Schedule\Tests\Feature;
 
 use PHPUnit\Framework\TestCase;
-use Monkeyslegion\Schedule\Discovery\AttributeScanner;
-use Monkeyslegion\Schedule\Task;
+use MonkeysLegion\Schedule\Discovery\AttributeScanner;
+use MonkeysLegion\Schedule\Task;
 
 class AttributeScannerTest extends TestCase
 {

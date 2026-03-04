@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Monkeyslegion\Schedule\Tests\Unit;
+namespace MonkeysLegion\Schedule\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Monkeyslegion\Schedule\Driver\CacheDriver;
-use Monkeyslegion\Schedule\Task;
+use MonkeysLegion\Schedule\Driver\CacheDriver;
+use MonkeysLegion\Schedule\Task;
 use MonkeysLegion\Database\Cache\Contracts\CacheInterface;
 
 class CacheDriverTest extends TestCase

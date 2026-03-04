@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Monkeyslegion\Schedule;
+namespace MonkeysLegion\Schedule;
 
 use Closure;
 
@@ -73,7 +73,7 @@ class Schedule
         $this->manager->dispatch($event);
     }
 
-    public function getLockProvider(): ?\Monkeyslegion\Schedule\Contracts\LockProvider
+    public function getLockProvider(): ?\MonkeysLegion\Schedule\Contracts\LockProvider
     {
         return $this->manager->getLockProvider();
     }

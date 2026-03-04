@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Monkeyslegion\Schedule\Cli\Command;
+namespace MonkeysLegion\Schedule\Cli\Command;
 
 use MonkeysLegion\Cli\Console\Attributes\Command as CommandAttr;
 use MonkeysLegion\Cli\Console\Command;
-use Monkeyslegion\Schedule\Schedule;
-use Monkeyslegion\Schedule\Support\CronParser;
+use MonkeysLegion\Schedule\Schedule;
+use MonkeysLegion\Schedule\Support\CronParser;
 use DateTimeImmutable;
-use Monkeyslegion\Schedule\Events\TaskStarting;
-use Monkeyslegion\Schedule\Events\TaskFinished;
-use Monkeyslegion\Schedule\Events\TaskFailed;
+use MonkeysLegion\Schedule\Events\TaskStarting;
+use MonkeysLegion\Schedule\Events\TaskFinished;
+use MonkeysLegion\Schedule\Events\TaskFailed;
 use Throwable;
 
 #[CommandAttr(

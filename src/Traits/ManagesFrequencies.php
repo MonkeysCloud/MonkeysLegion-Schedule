@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Monkeyslegion\Schedule\Traits;
+namespace MonkeysLegion\Schedule\Traits;
 
 trait ManagesFrequencies
 {

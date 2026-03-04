@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Monkeyslegion\Schedule;
+namespace MonkeysLegion\Schedule;
 
 use Closure;
 use DateTimeImmutable;
-use Monkeyslegion\Schedule\Support\CronParser;
-use Monkeyslegion\Schedule\Traits\ManagesFrequencies;
+use MonkeysLegion\Schedule\Support\CronParser;
+use MonkeysLegion\Schedule\Traits\ManagesFrequencies;
 use RuntimeException;
 
 class Task
@@ -187,19 +187,19 @@ class Task
 
     public function dispatchStarting(Schedule $schedule): void
     {
-        $class = $this->startingEvent ?? \Monkeyslegion\Schedule\Events\TaskStarting::class;
+        $class = $this->startingEvent ?? \MonkeysLegion\Schedule\Events\TaskStarting::class;
         $schedule->dispatch(new $class($this));
     }
 
     public function dispatchFinished(Schedule $schedule, mixed $result): void
     {
-        $class = $this->finishedEvent ?? \Monkeyslegion\Schedule\Events\TaskFinished::class;
+        $class = $this->finishedEvent ?? \MonkeysLegion\Schedule\Events\TaskFinished::class;
         $schedule->dispatch(new $class($this, $result));
     }
 
     public function dispatchFailed(Schedule $schedule, \Throwable $exception): void
     {
-        $class = $this->failedEvent ?? \Monkeyslegion\Schedule\Events\TaskFailed::class;
+        $class = $this->failedEvent ?? \MonkeysLegion\Schedule\Events\TaskFailed::class;
         $schedule->dispatch(new $class($this, $exception));
     }
 

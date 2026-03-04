@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Monkeyslegion\Schedule\Cli\Command;
+namespace MonkeysLegion\Schedule\Cli\Command;
 
 use Exception;
 use MonkeysLegion\Cli\Console\Attributes\Command as CommandAttr;
 use MonkeysLegion\Cli\Console\Command;
-use Monkeyslegion\Schedule\Schedule;
+use MonkeysLegion\Schedule\Schedule;
 
 #[CommandAttr(
     'schedule:test',

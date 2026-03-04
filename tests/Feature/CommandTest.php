@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Monkeyslegion\Schedule\Tests\Feature;
+namespace MonkeysLegion\Schedule\Tests\Feature;
 
 use PHPUnit\Framework\TestCase;
-use Monkeyslegion\Schedule\Schedule;
-use Monkeyslegion\Schedule\ScheduleManager;
-use Monkeyslegion\Schedule\Support\CronParser;
-use Monkeyslegion\Schedule\Driver\CacheDriver;
+use MonkeysLegion\Schedule\Schedule;
+use MonkeysLegion\Schedule\ScheduleManager;
+use MonkeysLegion\Schedule\Support\CronParser;
+use MonkeysLegion\Schedule\Driver\CacheDriver;
 use MonkeysLegion\Database\Cache\Contracts\CacheInterface as DatabaseCacheInterface;
 use MonkeysLegion\Cache\CacheInterface as BaseCacheInterface;
-use Monkeyslegion\Schedule\Cli\Command\ListCommand;
-use Monkeyslegion\Schedule\Cli\Command\TestCommand;
-use Monkeyslegion\Schedule\Cli\Command\ClearLocksCommand;
+use MonkeysLegion\Schedule\Cli\Command\ListCommand;
+use MonkeysLegion\Schedule\Cli\Command\TestCommand;
+use MonkeysLegion\Schedule\Cli\Command\ClearLocksCommand;
 use MonkeysLegion\Cache\CacheManager;
 
 class CommandTest extends TestCase

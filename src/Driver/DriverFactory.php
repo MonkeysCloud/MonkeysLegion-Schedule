@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Monkeyslegion\Schedule\Driver;
+namespace MonkeysLegion\Schedule\Driver;
 
-use Monkeyslegion\Schedule\Contracts\ScheduleDriver;
+use MonkeysLegion\Schedule\Contracts\ScheduleDriver;
 use MonkeysLegion\Database\Cache\Contracts\CacheInterface;
 
 class DriverFactory

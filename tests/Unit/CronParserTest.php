@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Monkeyslegion\Schedule\Tests\Unit;
+namespace MonkeysLegion\Schedule\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Monkeyslegion\Schedule\Support\CronParser;
+use MonkeysLegion\Schedule\Support\CronParser;
 use DateTimeImmutable;
 use DateTimeZone;
 

@@ -8,17 +8,17 @@ The following events are dispatched by the `Schedule` instance during execution:
 
 | Event | Dispatched When |
 |-------|-----------------|
-| `Monkeyslegion\Schedule\Events\TaskStarting` | Just before a task is executed. |
-| `Monkeyslegion\Schedule\Events\TaskFinished` | After a task completes successfully. |
-| `Monkeyslegion\Schedule\Events\TaskFailed` | When a task throws an exception or returns a non-zero exit code. |
+| `MonkeysLegion\Schedule\Events\TaskStarting` | Just before a task is executed. |
+| `MonkeysLegion\Schedule\Events\TaskFinished` | After a task completes successfully. |
+| `MonkeysLegion\Schedule\Events\TaskFailed` | When a task throws an exception or returns a non-zero exit code. |
 
 ### Listening to Events
 
 You can register listeners globally via the `Schedule` instance:
 
 ```php
-use Monkeyslegion\Schedule\Events\TaskStarting;
-use Monkeyslegion\Schedule\Events\TaskFailed;
+use MonkeysLegion\Schedule\Events\TaskStarting;
+use MonkeysLegion\Schedule\Events\TaskFailed;
 
 $schedule->listen(TaskStarting::class, function (TaskStarting $event) {
     Log::info("Task starting: " . $event->task->id);
@@ -49,7 +49,7 @@ If your logic is complex, create a dedicated handler class.
 ```php
 namespace App\Handlers;
 
-use Monkeyslegion\Schedule\Task;
+use MonkeysLegion\Schedule\Task;
 
 class DatabaseBackupHandler
 {
@@ -77,7 +77,7 @@ Custom events must accept the same constructor arguments as the defaults.
 ```php
 namespace App\Events;
 
-use Monkeyslegion\Schedule\Task;
+use MonkeysLegion\Schedule\Task;
 
 class SyncStarted
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Monkeyslegion\Schedule\Events;
+namespace MonkeysLegion\Schedule\Events;
 
-use Monkeyslegion\Schedule\Task;
+use MonkeysLegion\Schedule\Task;
 use Throwable;
 
 class TaskFailed

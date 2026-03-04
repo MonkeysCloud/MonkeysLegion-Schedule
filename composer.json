@@ -4,8 +4,8 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "Monkeyslegion\\Schedule\\": "src/",
-      "Monkeyslegion\\Schedule\\Tests\\": "tests/"
+      "MonkeysLegion\\Schedule\\": "src/",
+      "MonkeysLegion\\Schedule\\Tests\\": "tests/"
     }
   },
   "minimum-stability": "dev",

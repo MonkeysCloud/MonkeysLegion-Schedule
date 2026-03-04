@@ -2,18 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Monkeyslegion\Schedule\Driver;
+namespace MonkeysLegion\Schedule\Driver;
 
-use Monkeyslegion\Schedule\Contracts\ScheduleDriver;
-use Monkeyslegion\Schedule\Task;
+use MonkeysLegion\Schedule\Contracts\ScheduleDriver;
+use MonkeysLegion\Schedule\Task;
 use MonkeysLegion\Database\Cache\Contracts\CacheInterface;
 
 class CacheDriver implements ScheduleDriver
 {
     public function __construct(
         private readonly CacheInterface $cache
-    ) {
-    }
+    ) {}
 
     public function updateTaskState(string $taskId, array $metadata): void
     {

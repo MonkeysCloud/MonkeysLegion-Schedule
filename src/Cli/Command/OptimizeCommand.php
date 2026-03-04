@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Monkeyslegion\Schedule\Cli\Command;
+namespace MonkeysLegion\Schedule\Cli\Command;
 
 use MonkeysLegion\Cli\Console\Attributes\Command as CommandAttr;
 use MonkeysLegion\Cli\Console\Command;
-use Monkeyslegion\Schedule\Discovery\AttributeScanner;
-use Monkeyslegion\Database\Cache\Contracts\CacheInterface;
-use MonkeysLegion\Logger\Contracts\MonkeysLoggerInterface;
-use Monkeyslegion\Schedule\Task;
+use MonkeysLegion\Schedule\Discovery\AttributeScanner;
+use MonkeysLegion\Database\Cache\Contracts\CacheInterface;
+use MonkeysLegion\Schedule\Task;
 
 #[CommandAttr(
     'schedule:optimize',

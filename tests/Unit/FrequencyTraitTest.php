@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Monkeyslegion\Schedule\Tests\Unit;
+namespace MonkeysLegion\Schedule\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Monkeyslegion\Schedule\Task;
+use MonkeysLegion\Schedule\Task;
 
 class FrequencyTraitTest extends TestCase
 {
@@ -13,7 +13,7 @@ class FrequencyTraitTest extends TestCase
     {
         $task = new Task('foo', '* * * * *');
         $task->everyMinute();
-        
+
         $this->assertEquals('* * * * *', $task->expression);
     }
 
@@ -21,7 +21,7 @@ class FrequencyTraitTest extends TestCase
     {
         $task = new Task('foo', '* * * * *');
         $task->daily();
-        
+
         $this->assertEquals('0 0 * * *', $task->expression);
     }
 
@@ -29,7 +29,7 @@ class FrequencyTraitTest extends TestCase
     {
         $task = new Task('foo', '* * * * *');
         $task->hourly();
-        
+
         $this->assertEquals('0 * * * *', $task->expression);
     }
 
@@ -37,7 +37,7 @@ class FrequencyTraitTest extends TestCase
     {
         $task = new Task('foo', '* * * * *');
         $task->at('14:30');
-        
+
         $this->assertEquals('30 14 * * *', $task->expression);
     }
 
@@ -45,7 +45,7 @@ class FrequencyTraitTest extends TestCase
     {
         $task = new Task('foo', '* * * * *');
         $task->weekdays();
-        
+
         $this->assertEquals('* * * * 1-5', $task->expression);
     }
 
@@ -53,7 +53,7 @@ class FrequencyTraitTest extends TestCase
     {
         $task = new Task('foo', '* * * * *');
         $task->weekdays()->at('10:00');
-        
+
         $this->assertEquals('0 10 * * 1-5', $task->expression);
     }
 }

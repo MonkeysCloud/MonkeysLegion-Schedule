@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Monkeyslegion\Schedule\Support;
+namespace MonkeysLegion\Schedule\Support;
 
 use Cron\CronExpression;
 use DateTimeImmutable;

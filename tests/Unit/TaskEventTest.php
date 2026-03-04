@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Monkeyslegion\Schedule\Tests\Unit;
+namespace MonkeysLegion\Schedule\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Monkeyslegion\Schedule\Task;
-use Monkeyslegion\Schedule\Events\TaskStarting;
-use Monkeyslegion\Schedule\Events\TaskFinished;
-use Monkeyslegion\Schedule\Events\TaskFailed;
+use MonkeysLegion\Schedule\Task;
+use MonkeysLegion\Schedule\Events\TaskStarting;
+use MonkeysLegion\Schedule\Events\TaskFinished;
+use MonkeysLegion\Schedule\Events\TaskFailed;
 use RuntimeException;
 
 class TaskEventTest extends TestCase

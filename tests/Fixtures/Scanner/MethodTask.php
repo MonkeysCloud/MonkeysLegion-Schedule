@@ -1,8 +1,8 @@
 <?php
 
-namespace Monkeyslegion\Schedule\Tests\Fixtures\Scanner;
+namespace MonkeysLegion\Schedule\Tests\Fixtures\Scanner;
 
-use Monkeyslegion\Schedule\Attributes\Scheduled;
+use MonkeysLegion\Schedule\Attributes\Scheduled;
 
 class MethodTask
 {

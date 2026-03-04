@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Monkeyslegion\Schedule\Tests\Feature;
+namespace MonkeysLegion\Schedule\Tests\Feature;
 
 use PHPUnit\Framework\TestCase;
-use Monkeyslegion\Schedule\Schedule;
-use Monkeyslegion\Schedule\ScheduleManager;
-use Monkeyslegion\Schedule\Support\CronParser;
-use Monkeyslegion\Schedule\Driver\CacheDriver;
+use MonkeysLegion\Schedule\Schedule;
+use MonkeysLegion\Schedule\ScheduleManager;
+use MonkeysLegion\Schedule\Support\CronParser;
+use MonkeysLegion\Schedule\Driver\CacheDriver;
 use MonkeysLegion\Database\Cache\Contracts\CacheInterface;
-use Monkeyslegion\Schedule\Task;
+use MonkeysLegion\Schedule\Task;
 use MonkeysLegion\Cache\CacheManager;
 
 class SchedulerIntegrationTest extends TestCase

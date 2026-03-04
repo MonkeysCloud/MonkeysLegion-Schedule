@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Monkeyslegion\Schedule\Tests\Unit;
+namespace MonkeysLegion\Schedule\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Monkeyslegion\Schedule\Driver\RedisSchedule;
-use Monkeyslegion\Schedule\Task;
+use MonkeysLegion\Schedule\Driver\RedisSchedule;
+use MonkeysLegion\Schedule\Task;
 use Redis;
 
 class RedisScheduleTest extends TestCase

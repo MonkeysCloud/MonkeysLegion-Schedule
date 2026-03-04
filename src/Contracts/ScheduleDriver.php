@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Monkeyslegion\Schedule\Contracts;
+namespace MonkeysLegion\Schedule\Contracts;
 
-use Monkeyslegion\Schedule\Task;
+use MonkeysLegion\Schedule\Task;
 
 interface ScheduleDriver
 {

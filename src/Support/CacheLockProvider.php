@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Monkeyslegion\Schedule\Support;
+namespace MonkeysLegion\Schedule\Support;
 
 use MonkeysLegion\Database\Cache\Contracts\CacheInterface;
-use Monkeyslegion\Schedule\Contracts\LockProvider;
-use Monkeyslegion\Schedule\Task;
+use MonkeysLegion\Schedule\Contracts\LockProvider;
+use MonkeysLegion\Schedule\Task;
 
 class CacheLockProvider implements LockProvider
 {
