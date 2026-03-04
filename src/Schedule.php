@@ -72,4 +72,17 @@ class Schedule
     {
         $this->manager->dispatch($event);
     }
+
+    public function getLockProvider(): ?\Monkeyslegion\Schedule\Contracts\LockProvider
+    {
+        return $this->manager->getLockProvider();
+    }
+
+    /**
+     * Get a task by its ID.
+     */
+    public function getTask(string $id): ?Task
+    {
+        return $this->manager->getTask($id);
+    }
 }

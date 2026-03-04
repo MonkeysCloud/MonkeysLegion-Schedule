@@ -8,6 +8,8 @@ use Closure;
 use MonkeysLegion\Database\Cache\Contracts\CacheInterface;
 use Monkeyslegion\Schedule\Contracts\ScheduleDriver;
 use Monkeyslegion\Schedule\Discovery\AttributeScanner;
+use Monkeyslegion\Schedule\Contracts\LockProvider;
+use Monkeyslegion\Schedule\Support\CacheLockProvider;
 
 class ScheduleManager
 {
@@ -22,8 +24,12 @@ class ScheduleManager
         private readonly ?AttributeScanner $scanner,
         private readonly ScheduleDriver $driver,
         private ?\MonkeysLegion\Logger\Contracts\MonkeysLoggerInterface $logger = null,
-        private readonly bool $debugMode = false
+        private readonly bool $debugMode = false,
+        private ?LockProvider $lockProvider = null
     ) {
+        if ($this->cache) {
+            $this->lockProvider = new CacheLockProvider($this->cache);
+        }
         if ($this->debugMode && !$this->scanner) {
             throw new \InvalidArgumentException('AttributeScanner is required in debug mode for dynamic discovery.');
         } else if (!$this->debugMode && !$this->cache) {
@@ -158,5 +164,24 @@ class ScheduleManager
     public function all(): array
     {
         return $this->tasks;
+    }
+
+    /**
+     * Get a task by its ID.
+     */
+    public function getTask(string $id): ?Task
+    {
+        foreach ($this->tasks as $task) {
+            if ($task->id === $id) {
+                return $task;
+            }
+        }
+
+        return null;
+    }
+
+    public function getLockProvider(): ?LockProvider
+    {
+        return $this->lockProvider;
     }
 }

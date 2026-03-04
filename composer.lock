@@ -794,12 +794,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/MonkeysCloud/MonkeysLegion-Query.git",
-                "reference": "a56aaec401415b3851d4a4a688e2e4d84cf6a751"
+                "reference": "e8e2b9f476ff969d0b1f1171814cf9c88507dc52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MonkeysCloud/MonkeysLegion-Query/zipball/a56aaec401415b3851d4a4a688e2e4d84cf6a751",
-                "reference": "a56aaec401415b3851d4a4a688e2e4d84cf6a751",
+                "url": "https://api.github.com/repos/MonkeysCloud/MonkeysLegion-Query/zipball/e8e2b9f476ff969d0b1f1171814cf9c88507dc52",
+                "reference": "e8e2b9f476ff969d0b1f1171814cf9c88507dc52",
                 "shasum": ""
             },
             "require": {
@@ -834,7 +834,7 @@
                 "issues": "https://github.com/MonkeysCloud/MonkeysLegion-Query/issues",
                 "source": "https://github.com/MonkeysCloud/MonkeysLegion-Query/tree/main"
             },
-            "time": "2026-01-22T00:14:31+00:00"
+            "time": "2026-03-04T03:55:40+00:00"
         },
         {
             "name": "monkeyscloud/monkeyslegion-router",
@@ -1572,8 +1572,8 @@
             "version": "2.2.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/773c4158c0f08e13b6887964c5cd336b1dab53e9",
-                "reference": "773c4158c0f08e13b6887964c5cd336b1dab53e9",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/98b44590900543d56bcca83cf4d62e1fca344492",
+                "reference": "98b44590900543d56bcca83cf4d62e1fca344492",
                 "shasum": ""
             },
             "require": {
@@ -1619,7 +1619,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-02-27T17:41:34+00:00"
+            "time": "2026-03-04T09:14:08+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -2013,12 +2013,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "48b06a2edcd10a16077dea59ee6a034f84bbcc6d"
+                "reference": "08f08a07f68687b79609b4dafae5bee4832b533b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/48b06a2edcd10a16077dea59ee6a034f84bbcc6d",
-                "reference": "48b06a2edcd10a16077dea59ee6a034f84bbcc6d",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/08f08a07f68687b79609b4dafae5bee4832b533b",
+                "reference": "08f08a07f68687b79609b4dafae5bee4832b533b",
                 "shasum": ""
             },
             "require": {
@@ -2096,7 +2096,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2026-02-26T14:46:58+00:00"
+            "time": "2026-03-04T08:28:16+00:00"
         },
         {
             "name": "sebastian/cli-parser",

@@ -59,6 +59,15 @@ class Task
     }
 
     /**
+     * Assign a custom ID/name to the task.
+     */
+    public function name(string $id): self
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
      * Determine if task is due.
      */
     public function isDue(CronParser $parser, ?DateTimeImmutable $now = null): bool
@@ -192,6 +201,25 @@ class Task
     {
         $class = $this->failedEvent ?? \Monkeyslegion\Schedule\Events\TaskFailed::class;
         $schedule->dispatch(new $class($this, $exception));
+    }
+
+    /**
+     * Prevent the task from running if its previous instance is still executing.
+     */
+    public function withoutOverlapping(int $ttl = 3600): self
+    {
+        $this->withoutOverlapping = true;
+        $this->ttl = $ttl;
+        return $this;
+    }
+
+    /**
+     * Allow the task to run even if its previous instance is still executing.
+     */
+    public function allowOverlapping(): self
+    {
+        $this->withoutOverlapping = false;
+        return $this;
     }
 
     private function triggerBeforeCallbacks(): void

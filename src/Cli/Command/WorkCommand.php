@@ -71,14 +71,25 @@ final class WorkCommand extends Command
         $now = new DateTimeImmutable();
 
         foreach ($tasks as $task) {
-            if (! $task->isDue($this->parser, $now)) {
-                continue;
-            }
-
-            $this->taskLine($task->id, 'RUN', 'cyan');
-            $task->dispatchStarting($this->schedule);
+            $lockProvider = $this->schedule->getLockProvider();
+            $locked = false;
 
             try {
+                if (! $task->isDue($this->parser, $now)) {
+                    continue;
+                }
+
+                if ($task->withoutOverlapping && $lockProvider) {
+                    if (! $lockProvider->lock($task)) {
+                        $this->taskLine($task->id, 'LOCK', 'yellow');
+                        continue;
+                    }
+                    $locked = true;
+                }
+
+                $this->taskLine($task->id, 'RUN', 'cyan');
+                $task->dispatchStarting($this->schedule);
+
                 $result = $task->execute();
                 $task->markAsRun($now);
 
@@ -100,6 +111,10 @@ final class WorkCommand extends Command
                         ->add($e::class . ': ' . $e->getMessage(), 'gray')
                         ->print();
                 }
+            } finally {
+                if ($locked && $lockProvider) {
+                    $lockProvider->unlock($task);
+                }
             }
         }
     }
@@ -113,10 +128,21 @@ final class WorkCommand extends Command
         }
 
         foreach ($pending as $task) {
-            $this->taskLine($task->id, 'PEND', 'yellow');
-            $task->dispatchStarting($this->schedule);
+            $lockProvider = $this->schedule->getLockProvider();
+            $locked = false;
 
             try {
+                if ($task->withoutOverlapping && $lockProvider) {
+                    if (! $lockProvider->lock($task)) {
+                        $this->taskLine($task->id, 'LOCK', 'yellow');
+                        continue;
+                    }
+                    $locked = true;
+                }
+
+                $this->taskLine($task->id, 'PEND', 'yellow');
+                $task->dispatchStarting($this->schedule);
+
                 $result = $task->execute();
                 $this->taskLine($task->id, 'DONE', 'green');
                 $task->dispatchFinished($this->schedule, $result);
@@ -128,6 +154,10 @@ final class WorkCommand extends Command
                         ->add('  ', 'gray')
                         ->add($e::class . ': ' . $e->getMessage(), 'gray')
                         ->print();
+                }
+            } finally {
+                if ($locked && $lockProvider) {
+                    $lockProvider->unlock($task);
                 }
             }
         }

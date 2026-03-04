@@ -36,12 +36,23 @@ final class RunnerCommand extends Command
 
             // 1. Static Scheduled Tasks
             foreach ($this->schedule->getTasks() as $task) {
+                $lockProvider = $this->schedule->getLockProvider();
+                $locked = false;
+
                 try {
                     if (! $task->isDue($this->parser, $now)) {
                         if ($this->isVerbose()) {
                             $this->taskLine($task->id, 'SKIP', 'gray');
                         }
                         continue;
+                    }
+
+                    if ($task->withoutOverlapping && $lockProvider) {
+                        if (! $lockProvider->lock($task)) {
+                            $this->taskLine($task->id, 'LOCK', 'yellow');
+                            continue;
+                        }
+                        $locked = true;
                     }
 
                     $this->taskLine($task->id, 'RUN', 'cyan');
@@ -66,6 +77,10 @@ final class RunnerCommand extends Command
                             ->add($e::class . ': ' . $e->getMessage(), 'gray')
                             ->print();
                     }
+                } finally {
+                    if ($locked && $lockProvider) {
+                        $lockProvider->unlock($task);
+                    }
                 }
             }
 
@@ -73,7 +88,18 @@ final class RunnerCommand extends Command
             $pending = $this->schedule->getPendingTasks();
 
             foreach ($pending as $task) {
+                $lockProvider = $this->schedule->getLockProvider();
+                $locked = false;
+
                 try {
+                    if ($task->withoutOverlapping && $lockProvider) {
+                        if (! $lockProvider->lock($task)) {
+                            $this->taskLine($task->id, 'LOCK', 'yellow');
+                            continue;
+                        }
+                        $locked = true;
+                    }
+
                     $this->taskLine($task->id, 'PEND', 'yellow');
                     $task->dispatchStarting($this->schedule);
                     $result = $task->execute();
@@ -88,6 +114,10 @@ final class RunnerCommand extends Command
                             ->add('  ', 'gray')
                             ->add($e::class . ': ' . $e->getMessage(), 'gray')
                             ->print();
+                    }
+                } finally {
+                    if ($locked && $lockProvider) {
+                        $lockProvider->unlock($task);
                     }
                 }
             }

@@ -8,6 +8,7 @@ use MonkeysLegion\Cli\Console\Attributes\Command as CommandAttr;
 use MonkeysLegion\Cli\Console\Command;
 use Monkeyslegion\Schedule\Discovery\AttributeScanner;
 use Monkeyslegion\Database\Cache\Contracts\CacheInterface;
+use MonkeysLegion\Logger\Contracts\MonkeysLoggerInterface;
 use Monkeyslegion\Schedule\Task;
 
 #[CommandAttr(

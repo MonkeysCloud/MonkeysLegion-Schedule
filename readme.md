@@ -80,8 +80,9 @@ $schedule->call(function() {
 | `schedule:run` | **The Heartbeat.** Execute all tasks that are currently due. |
 | `schedule:work` | **The Daemon.** Persistent loop with 1s pulse and Redis polling. |
 | `schedule:optimize` | **The Cache.** Warm up task discovery for production performance. |
-| `schedule:list` | **The Dashboard.** View upcoming tasks and their status (Not yet implemented). |
-| `schedule:test {id}` | **The Sandbox.** Manually trigger a specific task for debugging (Not yet implemented). |
+| `schedule:list` | **The Dashboard.** View all registered tasks, their expressions, and next run times. |
+| `schedule:test {id}` | **The Sandbox.** Manually trigger a specific task for debugging. |
+| `schedule:clear-locks` | **The Eraser.** Clear all task locks or a specific task lock. |
 
 ---
 
@@ -99,20 +100,19 @@ Monitor your ecosystem with high-level dispatcher events or task-specific hooks.
 
 ## 🗺 Roadmap
 
-### Phase 4: Atomic Locking (In Progress) ⏳
-
-- [ ] **LockProvider**: Interfacing with Redis for distributed locking.
-- [ ] **Overlapping Prevention**: `->withoutOverlapping()` logic to ensure task exclusivity.
-- [ ] **Self-Healing**: TTL-based lock expiry to handle process crashes.
+### Phase 4: Atomic Locking (Prevention) ✅
+- [x] **LockProvider**: Interfacing with Redis/Cache for distributed locking.
+- [x] **Overlapping Prevention**: `->withoutOverlapping()` logic to ensure task exclusivity.
+- [x] **Self-Healing**: TTL-based lock expiry for automatic cleanup of stale locks.
 
 ### Completed Milestones ✅
-
 - [x] **Core Architecture**: Task Value Objects and the Registry.
 - [x] **Discovery Engine**: Attribute scanning and dynamic loading.
 - [x] **Sub-Minute Precision**: 6-segment Cron support.
 - [x] **Multi-Process isolation**: Non-blocking task execution.
 - [x] **Redis Integration**: Pushed ad-hoc task support via Redis drivers.
 - [x] **Logger & Monitoring**: Seamless `monkeyslegion/logger` integration.
+- [x] **Atomic Locking**: Fully implemented overlapping prevention via `LockProvider`.
 
 ---
 
