@@ -14,11 +14,11 @@ class Task
 {
     use ManagesFrequencies;
 
-    public const DEFAULT_TTL = 3600;
-    public const CACHE_PREFIX = 'ml_schedule:';
-    public const CACHE_KEY_TASKS = 'ml_schedule:tasks';
-    public const CACHE_KEY_PENDING = 'ml_schedule:pending';
-    public const CACHE_KEY_STATE = 'ml_schedule:state:';
+    public const int DEFAULT_TTL = 3600;
+    public const string CACHE_PREFIX = 'ml_schedule.';
+    public const string CACHE_KEY_TASKS = 'ml_schedule.tasks';
+    public const string CACHE_KEY_PENDING = 'ml_schedule.pending';
+    public const string CACHE_KEY_STATE = 'ml_schedule.state.';
 
     public string $id;
 

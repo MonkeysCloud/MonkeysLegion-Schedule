@@ -7,6 +7,8 @@ namespace MonkeysLegion\Schedule\Driver;
 use MonkeysLegion\Schedule\Contracts\ScheduleDriver;
 use MonkeysLegion\Schedule\Task;
 use MonkeysLegion\Database\Cache\Contracts\CacheInterface;
+use MonkeysLegion\Schedule\Support\KeyNormalizer;
+
 
 class CacheDriver implements ScheduleDriver
 {
@@ -44,6 +46,7 @@ class CacheDriver implements ScheduleDriver
 
     private function taskStateKey(string $taskId): string
     {
-        return Task::CACHE_KEY_STATE . $taskId;
+        return KeyNormalizer::normalize(Task::CACHE_KEY_STATE . $taskId);
     }
+
 }

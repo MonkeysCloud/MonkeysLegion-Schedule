@@ -8,6 +8,8 @@ use PHPUnit\Framework\TestCase;
 use MonkeysLegion\Schedule\Task;
 use MonkeysLegion\Schedule\Support\CacheLockProvider;
 use MonkeysLegion\Database\Cache\Contracts\CacheInterface;
+use MonkeysLegion\Schedule\Support\KeyNormalizer;
+
 
 class LockingTest extends TestCase
 {
@@ -21,12 +23,12 @@ class LockingTest extends TestCase
 
         $cache->expects($this->once())
             ->method('add')
-            ->with('schedule:lock:test-task', $this->anything(), 60)
+            ->with(KeyNormalizer::normalize('schedule.lock.test-task'), $this->anything(), 60)
             ->willReturn(true);
 
         $cache->expects($this->once())
             ->method('delete')
-            ->with('schedule:lock:test-task')
+            ->with(KeyNormalizer::normalize('schedule.lock.test-task'))
             ->willReturn(true);
 
         $this->assertTrue($lockProvider->lock($task));
@@ -56,7 +58,7 @@ class LockingTest extends TestCase
 
         $cache->expects($this->once())
             ->method('has')
-            ->with('schedule:lock:test-task')
+            ->with(KeyNormalizer::normalize('schedule.lock.test-task'))
             ->willReturn(true);
 
         $this->assertTrue($lockProvider->isLocked($task));

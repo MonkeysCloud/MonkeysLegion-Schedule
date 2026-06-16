@@ -10,7 +10,7 @@ use MonkeysLegion\Schedule\Task;
 
 class CacheLockProvider implements LockProvider
 {
-    private string $prefix = 'schedule:lock:';
+    private string $prefix = 'schedule.lock.';
 
     public function __construct(
         private readonly CacheInterface $cache
@@ -48,6 +48,7 @@ class CacheLockProvider implements LockProvider
 
     private function getLockKey(Task $task): string
     {
-        return $this->prefix . $task->id;
+        return KeyNormalizer::normalize($this->prefix . $task->id);
     }
 }
+

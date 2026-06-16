@@ -8,6 +8,8 @@ use PHPUnit\Framework\TestCase;
 use MonkeysLegion\Schedule\Driver\CacheDriver;
 use MonkeysLegion\Schedule\Task;
 use MonkeysLegion\Database\Cache\Contracts\CacheInterface;
+use MonkeysLegion\Schedule\Support\KeyNormalizer;
+
 
 class CacheDriverTest extends TestCase
 {
@@ -58,7 +60,7 @@ class CacheDriverTest extends TestCase
 
         $this->cache->expects($this->once())
             ->method('set')
-            ->with(Task::CACHE_KEY_STATE . $taskId, $metadata);
+            ->with(KeyNormalizer::normalize(Task::CACHE_KEY_STATE . $taskId), $metadata);
 
         $this->driver->updateTaskState($taskId, $metadata);
     }
